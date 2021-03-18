@@ -9,7 +9,9 @@ function Book(title, author, pages) {
     this.pages = pages
 }
 
-// Takes user's input and stores it into an array
+/* Takes user's input and stores it into an array.
+To do:
+- Wire up HTML button to cause this */
 function addBookToLibrary() {
     const bookToAdd = Object.create(Book);
     bookToAdd.title = prompt("Please enter a title");
