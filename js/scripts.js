@@ -22,12 +22,12 @@ function addBookToLibrary() {
 /* Write a function that loops through the array and displays
 each book on the page. Display as a card 
 TO DO:
-- Fix spacing between items */
+- Add logic to ensure items are not repeated each time the function is ran*/
 function displayBook(item) {
-    const cardContent = document.createElement('p');
+    const cardContent = document.createElement('div');
    
     cardContent.classList.add('cardContent');
-    cardContent.textContent = item.title + item.author + item.pages;
+    cardContent.innerHTML = `<p> Title: ${ item.title }</p><p>Author: ${ item.author }</p><p>Pages: ${ item.pages }</p>`;
     container.appendChild(cardContent);
 }
-// myLibrary.forEach(displayBook);
+// myLibrary.forEach(displayBook); // add books stored in my library to page
