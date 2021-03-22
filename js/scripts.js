@@ -1,5 +1,6 @@
 // Initalise an empty array to hold our books
 let myLibrary = [];
+
 const container = document.querySelector('.cardsContainer');
 
 const newBookButton = document.querySelector('#newBookButton')
@@ -28,8 +29,7 @@ function addBookToLibrary() {
 }
 
 /* Display book to page 
-TODO:
-- Set a variable to the current index of item, and use to create set attribute no.*/
+TODO: */
 function createDisplayBook(item) {
     // Get the index of the last array obj
     const lastIndexNum = myLibrary.length - 1;     
@@ -68,6 +68,7 @@ function createDisplayBook(item) {
         })
     })
 
+    /* addEventListener to listen for click on  mark as read button*/
     document.addEventListener('click', function (event) {
         if (event.target.matches(`#button${ lastIndexNum }`)) {
             item.read = "Yes";
