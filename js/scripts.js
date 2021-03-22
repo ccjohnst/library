@@ -79,12 +79,13 @@ function createDisplayBook(item) {
     const markAsReadButton = document.querySelectorAll('.readButtons');
     markAsReadButton.forEach((button) => {
         button.addEventListener('click', () => {
+            
             item.read = "Yes";
-            let readUpdate = document.getElementById(`Read${ lastIndexNum }`);
-
-            return readUpdate.innerHTML = `Read: ${ item.read } `
+            document.getElementById(`Read${ lastIndexNum }`).innerHTML = `Read: ${ item.read } `
+            
         })
     })
+
 }
 
 
