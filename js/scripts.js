@@ -11,15 +11,8 @@ function Book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.read = read
-
-    this.markRead = function() {
-       this.read = "Yes";
-    }
 }
 
-// Book.prototype.markAsRead = function () {
-//     this.read + 'Yes';
-// }
 
 /* Takes user's input and stores it into an array. 
 TODO:
@@ -75,17 +68,13 @@ function createDisplayBook(item) {
         })
     })
 
-    /* Mark as Read button */
-    const markAsReadButton = document.querySelectorAll('.readButtons');
-    markAsReadButton.forEach((button) => {
-        button.addEventListener('click', () => {
-            
+    document.addEventListener('click', function (event) {
+        if (event.target.matches(`#button${ lastIndexNum }`)) {
             item.read = "Yes";
-            document.getElementById(`Read${ lastIndexNum }`).innerHTML = `Read: ${ item.read } `
-            
-        })
-    })
+            document.getElementById(`Read${ lastIndexNum }`).innerHTML = `Read: ${ item.read }`;
 
+        }
+    }, false);
 }
 
 
