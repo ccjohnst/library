@@ -14,6 +14,40 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+/* Create form and pass input to Book object
+TO DO:
+- Finish creating all input boxes
+- Wire up to submitt 
+- Create objects from the submitted values of input*/
+function displayForm() {
+    // Create Form
+    let form = document.createElement('form');
+
+    // create title input
+    let titleInput = doucment.createElement('input');
+    titleInput.setAttribute("name", "title");
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("placeholder", "Title");
+
+
+    // create author input
+    let authorInput = document.createElement("input");
+    authorInput.setAttribute("name", "title");
+    authorInput.setAttribute("type", "text");
+    authorInput.setAttribute("placeholder", "Author");
+
+    // create pases input
+    let pagesInput = document.createElement("input");
+    pagesInput.setAttribute("name", "pages");
+    pagesInput.setAttribute("type", "number");
+    pagesInput.setAttribute("placeholder", "Pages read");
+
+    // create read input
+    let readInput = document.createElement("input");
+    readInput.setAttribute("name", "read");
+    readInput.setAttribute("type", "text");
+    readInput.setAttribute("placeholder", "Read status")
+}
 
 /* Takes user's input and stores it into an array. 
 TODO:
