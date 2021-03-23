@@ -1,6 +1,8 @@
 /*TO DO:
 - Add persistence
-- Have all items in mylibrary auto-populate on page load*/
+- Have all items in mylibrary auto-populate on page load
+*/
+
 
 // Initalise an empty array to hold our books
 let myLibrary = [];
@@ -22,8 +24,11 @@ function Book(title, author, pages, read) {
 TO DO:
 - Validate input
 - Create pop-up box
-- Box to disappear after creation */
+- Box to disappear after creation
+- New  book form to only appear once */
 function displayForm() {
+    // stop multiple new items being created at once
+    newBookButton.disabled = true;
     // Create Form
     let form = document.createElement('form');
 
@@ -78,9 +83,12 @@ function displayForm() {
     form.append(submitButton);
     container.append(form);
 
+    // Add eventListener for click on submit button, and remove the form after submit
     document.addEventListener('click', function (event) {
         if (event.target.matches(`#submitButton`)) {
             addBookToLibrary();
+            // form.remove(); // CAUTION seems to cause issues with  adding items.
+            // newBookButton.disabled = false;
         }
     }, false);
 }
@@ -96,8 +104,6 @@ function addBookToLibrary() {
     myLibrary.push(bookToAdd);
     createDisplayBook(bookToAdd);
 }
-
-
 
 /* Display book to page 
 TODO: */
@@ -156,3 +162,8 @@ function displayAllBooks() {
     return myLibrary.forEach(createDisplayBook);
 }
 
+// let myBook1 = new Book("The hobbit", "J.R. Tolkein", 200, "No");
+// let myBook2 = new Book("About a boy", "Nick Hornby", 200, "No");
+// // myLibrary.push(myBook1);
+// // myLibrary.push(myBook2);
+// displayAllBooks();
