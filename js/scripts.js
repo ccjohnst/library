@@ -20,9 +20,9 @@ function Book(title, author, pages, read) {
 
 /* Create form and pass input to Book object
 TO DO:
-- Finish creating all input boxes
-- Wire up to submitt 
-- Create objects from the submitted values of input*/
+- Validate input
+- Create pop-up box
+- Box to disappear after creation */
 function displayForm() {
     // Create Form
     let form = document.createElement('form');
@@ -85,9 +85,7 @@ function displayForm() {
     }, false);
 }
 
-/* Takes user's input and stores it into an array. 
-TODO:
-- Validate input*/
+/* Takes user's input and stores it into an array.*/
 function addBookToLibrary() {
 
     const bookToAdd = Object.create(Book);
