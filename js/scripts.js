@@ -1,10 +1,14 @@
+/*TO DO:
+- Add persistence
+- Have all items in mylibrary auto-populate on page load*/
+
 // Initalise an empty array to hold our books
 let myLibrary = [];
 
 const container = document.querySelector('.cardsContainer');
 
 const newBookButton = document.querySelector('#newBookButton')
-newBookButton.addEventListener("click", addBookToLibrary);
+newBookButton.addEventListener("click", displayForm);
 
 // Create book object
 function Book(title, author, pages, read) {
@@ -23,44 +27,79 @@ function displayForm() {
     // Create Form
     let form = document.createElement('form');
 
-    // create title input
-    let titleInput = doucment.createElement('input');
-    titleInput.setAttribute("name", "title");
-    titleInput.setAttribute("type", "text");
-    titleInput.setAttribute("placeholder", "Title");
+    // create title input and label
+    let titleLabel = document.createElement('label');
+    titleLabel.setAttribute("for", "title");
+        let titleInput = document.createElement('input');
+        titleInput.setAttribute("id", "title");
+        titleInput.setAttribute("type", "text");
+        titleInput.setAttribute("placeholder", "Title");
+    titleLabel.append(titleInput);
 
 
     // create author input
-    let authorInput = document.createElement("input");
-    authorInput.setAttribute("name", "title");
-    authorInput.setAttribute("type", "text");
-    authorInput.setAttribute("placeholder", "Author");
+    let authorLabel = document.createElement('label');
+    authorLabel.setAttribute("for", "author");
+        let authorInput = document.createElement("input");
+        authorInput.setAttribute("id", "author");
+        authorInput.setAttribute("type", "text");
+        authorInput.setAttribute("placeholder", "Author");
+    authorLabel.append(authorInput);
 
     // create pases input
-    let pagesInput = document.createElement("input");
-    pagesInput.setAttribute("name", "pages");
-    pagesInput.setAttribute("type", "number");
-    pagesInput.setAttribute("placeholder", "Pages read");
+    let pagesLabel = document.createElement('label');
+    pagesLabel.setAttribute("for", "pages");
+        let pagesInput = document.createElement("input");
+        pagesInput.setAttribute("id", "pages");
+        pagesInput.setAttribute("type", "number");
+        pagesInput.setAttribute("placeholder", "Pages read");
+    pagesLabel.append(pagesInput);
 
     // create read input
-    let readInput = document.createElement("input");
-    readInput.setAttribute("name", "read");
-    readInput.setAttribute("type", "text");
-    readInput.setAttribute("placeholder", "Read status")
+    let readLabel = document.createElement('label');
+    readLabel.setAttribute("for", "read");
+        let readInput = document.createElement("input");
+        readInput.setAttribute("id", "read");
+        readInput.setAttribute("type", "text");
+        readInput.setAttribute("placeholder", "Read status")
+    readLabel.append(readInput);
+
+    // Create submit button
+    let submitButton = document.createElement('button');
+    submitButton.setAttribute("id", "submitButton");
+    submitButton.setAttribute("type", "button");
+    submitButton.innerText = "Submit";
+
+    // Add inputs to form 
+    form.append(titleLabel);
+    form.append(authorLabel);
+    form.append(pagesLabel);
+    form.append(readLabel);
+    form.append(submitButton);
+    container.append(form);
+
+    document.addEventListener('click', function (event) {
+        if (event.target.matches(`#submitButton`)) {
+            addBookToLibrary();
+        }
+    }, false);
 }
 
 /* Takes user's input and stores it into an array. 
 TODO:
 - Validate input*/
 function addBookToLibrary() {
+
     const bookToAdd = Object.create(Book);
-    bookToAdd.title = prompt("Please enter a title");
-    bookToAdd.author = prompt("Please enter an author");
-    bookToAdd.pages = prompt("Please enter the pages");
-    bookToAdd.read = prompt("Have you read this?", "Yes");
+    bookToAdd.title = document.getElementById("title").value;
+    bookToAdd.author = document.getElementById("author").value;
+    bookToAdd.pages = document.getElementById("pages").value;
+    bookToAdd.read = document.getElementById("read").value;
     myLibrary.push(bookToAdd);
     createDisplayBook(bookToAdd);
 }
+
+
 
 /* Display book to page 
 TODO: */
