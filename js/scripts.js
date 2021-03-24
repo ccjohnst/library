@@ -12,6 +12,7 @@ const container = document.querySelector('.cardsContainer');
 const newBookButton = document.querySelector('#newBookButton')
 newBookButton.addEventListener("click", displayForm);
 
+
 // Create book object
 function Book(title, author, pages, read) {
     this.title = title
@@ -31,6 +32,7 @@ function displayForm() {
     newBookButton.disabled = true;
     // Create Form
     let form = document.createElement('form');
+    form.setAttribute("onsubmit", "return submitClick()")
 
     // create title input and label
     let titleLabel = document.createElement('label');
@@ -57,7 +59,7 @@ function displayForm() {
         let pagesInput = document.createElement("input");
         pagesInput.setAttribute("id", "pages");
         pagesInput.setAttribute("type", "number");
-        pagesInput.setAttribute("placeholder", "Pages read");
+        pagesInput.setAttribute("placeholder", "Number of pages");
     pagesLabel.append(pagesInput);
 
     // create read input
@@ -72,7 +74,7 @@ function displayForm() {
     // Create submit button
     let submitButton = document.createElement('button');
     submitButton.setAttribute("id", "submitButton");
-    submitButton.setAttribute("type", "button");
+    // submitButton.setAttribute("type", "button");
     submitButton.innerText = "Submit";
 
     // Add inputs to form 
@@ -82,15 +84,15 @@ function displayForm() {
     form.append(readLabel);
     form.append(submitButton);
     container.append(form);
+}
 
-    // Add eventListener for click on submit button, and remove the form after submit
-    document.addEventListener('click', function (event) {
-        if (event.target.matches(`#submitButton`)) {
-            addBookToLibrary();
-            // form.remove(); // CAUTION seems to cause issues with  adding items.
-            // newBookButton.disabled = false;
-        }
-    }, false);
+// Add book to library on submit, and remove form
+function submitClick() {
+    addBookToLibrary();
+    // form.style.display="none";
+    newBookButton.disabled = false;
+    document.querySelector('form').remove();
+    return false;
 }
 
 /* Takes user's input and stores it into an array.*/
@@ -103,6 +105,7 @@ function addBookToLibrary() {
     bookToAdd.read = document.getElementById("read").value;
     myLibrary.push(bookToAdd);
     createDisplayBook(bookToAdd);
+    localStorage.storedBooks = myLibrary;
 }
 
 /* Display book to page 
@@ -142,6 +145,7 @@ function createDisplayBook(item) {
     delBookButton.forEach((button) => {
         button.addEventListener('click', () => {
             button.parentElement.remove(); 
+
         })
     })
 
