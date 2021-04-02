@@ -6,7 +6,7 @@
 
 
 // Initalise an empty array to hold our books
-let myLibrary = [];
+// let myLibrary = [];
 
 const container = document.querySelector('.cardsContainer');
 
@@ -32,10 +32,20 @@ class Book {
 }
 
 // Container class for book objects
-class MyLibrary {
-
+class Books {
+    constructor(){
+        this.myLibrary = [];
+    }
+    newBook(title, author, pages, read) {
+        let b = new Book(title, author, pages, read)
+        this.myLibrary.push(b)
+        return b
+    }
+    get allBooks(){
+        return this.myLibrary
+    }
 }
-
+const booksToAdd = new Books();
 
 /* Create form and pass input to Book object
 TO DO:
@@ -114,21 +124,25 @@ function submitClick() {
 /* Takes user's input and stores it into an array.*/
 function addBookToLibrary() {
 
-    const bookToAdd = new Book;
-    bookToAdd.title = document.getElementById("title").value;
-    bookToAdd.author = document.getElementById("author").value;
-    bookToAdd.pages = document.getElementById("pages").value;
-    bookToAdd.read = document.getElementById("read").value;
-    myLibrary.push(bookToAdd);
-    createDisplayBook(bookToAdd);
+
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const pages = document.getElementById("pages").value;
+    const read = document.getElementById("read").value;
+    const ourNewBook = booksToAdd.newBook(title, author, pages, read);
+    createDisplayBook(ourNewBook, booksToAdd);
+
+
 
 }
 
 /* Display book to page 
 TODO: */
-function createDisplayBook(item) {
+function createDisplayBook(item, index) {
     // Get the index of the last array obj
-    const lastIndexNum = myLibrary.length - 1;
+    // console.log(item);
+    console.log(index.allBooks);
+    const lastIndexNum = index.allBooks.length - 1;
     
     // Create divs containing Book obj info
     const cardContent = document.createElement('div');
@@ -162,7 +176,7 @@ function createDisplayBook(item) {
         button.addEventListener('click', () => {
             button.parentElement.remove(); 
             for (let i = 0; i < 1; i++)
-           { myLibrary.splice(myLibrary.indexOf(item), 1);}
+           { index.allBooks.splice(index.allBooks.indexOf(item), 1);}
         })
     })
 
