@@ -1,6 +1,7 @@
 /*TO DO:
 - Add persistence
 - Have all items in mylibrary auto-populate on page load
+- Create container class for all class objects
 */
 
 
@@ -13,13 +14,28 @@ const newBookButton = document.querySelector('#newBookButton')
 newBookButton.addEventListener("click", displayForm);
 
 
-// Create book object
-function Book(title, author, pages, read) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
+// // Create book objecthttps://stackoverflow.com/questions/52377344/javascript-array-of-instances-of-a-class
+// function Book(title, author, pages, read) {
+//     this.title = title
+//     this.author = author
+//     this.pages = pages
+//     this.read = read
+// }
+
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
+
+// Container class for book objects
+class MyLibrary {
+
+}
+
 
 /* Create form and pass input to Book object
 TO DO:
@@ -98,21 +114,21 @@ function submitClick() {
 /* Takes user's input and stores it into an array.*/
 function addBookToLibrary() {
 
-    const bookToAdd = Object.create(Book);
+    const bookToAdd = new Book;
     bookToAdd.title = document.getElementById("title").value;
     bookToAdd.author = document.getElementById("author").value;
     bookToAdd.pages = document.getElementById("pages").value;
     bookToAdd.read = document.getElementById("read").value;
     myLibrary.push(bookToAdd);
     createDisplayBook(bookToAdd);
-    localStorage.storedBooks = myLibrary;
+
 }
 
 /* Display book to page 
 TODO: */
 function createDisplayBook(item) {
     // Get the index of the last array obj
-    const lastIndexNum = myLibrary.length - 1;     
+    const lastIndexNum = myLibrary.length - 1;
     
     // Create divs containing Book obj info
     const cardContent = document.createElement('div');
@@ -145,7 +161,8 @@ function createDisplayBook(item) {
     delBookButton.forEach((button) => {
         button.addEventListener('click', () => {
             button.parentElement.remove(); 
-
+            for (let i = 0; i < 1; i++)
+           { myLibrary.splice(myLibrary.indexOf(item), 1);}
         })
     })
 
