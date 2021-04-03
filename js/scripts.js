@@ -5,22 +5,11 @@
 */
 
 
-// Initalise an empty array to hold our books
-// let myLibrary = [];
-
 const container = document.querySelector('.cardsContainer');
 
 const newBookButton = document.querySelector('#newBookButton')
 newBookButton.addEventListener("click", displayForm);
 
-
-// // Create book objecthttps://stackoverflow.com/questions/52377344/javascript-array-of-instances-of-a-class
-// function Book(title, author, pages, read) {
-//     this.title = title
-//     this.author = author
-//     this.pages = pages
-//     this.read = read
-// }
 
 class Book {
     constructor(title, author, pages, read) {
@@ -131,9 +120,6 @@ function addBookToLibrary() {
     const read = document.getElementById("read").value;
     const ourNewBook = booksToAdd.newBook(title, author, pages, read);
     createDisplayBook(ourNewBook, booksToAdd);
-
-
-
 }
 
 /* Display book to page 
@@ -175,8 +161,10 @@ function createDisplayBook(item, index) {
     delBookButton.forEach((button) => {
         button.addEventListener('click', () => {
             button.parentElement.remove(); 
-            for (let i = 0; i < 1; i++)
-           { index.allBooks.splice(index.allBooks.indexOf(item), 1);}
+            for (let i = 0; i < 1; i++) { 
+            //    index.allBooks.splice(index.allBooks.indexOf(item), 1);
+               delete index.allBooks[lastIndexNum];
+            }
         })
     })
 
@@ -185,7 +173,6 @@ function createDisplayBook(item, index) {
         if (event.target.matches(`#button${ lastIndexNum }`)) {
             item.read = "Yes";
             document.getElementById(`Read${ lastIndexNum }`).innerHTML = `Read: ${ item.read }`;
-
         }
     }, false);
 }
@@ -197,8 +184,3 @@ function displayAllBooks() {
     return myLibrary.forEach(createDisplayBook);
 }
 
-// let myBook1 = new Book("The hobbit", "J.R. Tolkein", 200, "No");
-// let myBook2 = new Book("About a boy", "Nick Hornby", 200, "No");
-// // myLibrary.push(myBook1);
-// // myLibrary.push(myBook2);
-// displayAllBooks();
